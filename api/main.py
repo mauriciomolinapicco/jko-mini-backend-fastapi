@@ -15,6 +15,11 @@ class EmailRequest(BaseModel):
     message: str
 
 
+@app.get("/")
+def index():
+    return {"message":"Hello World! Set up successful."}
+
+
 @app.post("/send-email")
 def send_email(request: EmailRequest):
     conteudo = f"Tem uma mensagem nova! \n Nome: {request.name} \n Email: {request.email} \n Mensagem: {request.message}"
