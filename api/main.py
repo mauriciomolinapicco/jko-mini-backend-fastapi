@@ -4,10 +4,19 @@ import sendgrid
 from sendgrid.helpers.mail import Mail, Email, To, Content
 import os 
 from dotenv import load_dotenv
+from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://jko-design-portfolio.vercel.app"],
+    allow_credentials=True,
+    allow_methods=['*'],
+    allow_headers=['*'],
+)
 
 class EmailRequest(BaseModel):
     name: str
@@ -36,7 +45,7 @@ def send_email(request: EmailRequest):
 
         response = sg.send(mail)
 
-        return {"status": "success", "message": "Correo enviado exitosamente", "status_code": response.status_code}
+        return {"status": "success", "message": "Email sent with success", "status_code": response.status_code}
 
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Deu erro: {str(e)}")
