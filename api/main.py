@@ -12,7 +12,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[os.getenv("ALLOWED_HOST")],
+    allow_origins=["https://www.jko3dstudio.com"],
     allow_credentials=True,
     allow_methods=['*'],
     allow_headers=['*'],
