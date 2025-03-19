@@ -12,7 +12,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://jko-design-portfolio.vercel.app"],
+    allow_origins=[os.getenv("ALLOWED_HOST")],
     allow_credentials=True,
     allow_methods=['*'],
     allow_headers=['*'],
